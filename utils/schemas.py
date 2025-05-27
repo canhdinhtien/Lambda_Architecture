@@ -67,3 +67,17 @@ def get_stock_realtime_view_schema():
         StructField("record_count_window", LongType(), True),
         StructField("view_type", StringType(), True)       
      ])
+
+def get_article_data_schema_from_kafka():
+    return StructType([
+        StructField("article_id", StringType(), True),
+        StructField("title", StringType(), True),
+        StructField("url", StringType(), True),
+        StructField("summary", StringType(), True),
+        StructField("published_time_str", StringType(), True),
+        StructField("published_timestamp", TimestampType(), True),
+        StructField("image_url", StringType(), True),
+        StructField("full_content", StringType(), True), 
+        StructField("content_method", StringType(), True),
+        StructField("processing_timestamp", StringType(), True),
+    ])

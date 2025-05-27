@@ -8,13 +8,24 @@ ES_URL = f"http://{ES_HOSTS}:{ES_PORT}"
 SPARK_MASTER = os.environ.get('SPARK_MASTER', 'spark://spark-master:7077')
 
 KAFKA_TOPIC_STOCK_DATA = 'stock_market_data'
+KAFKA_TOPIC_ARTICLES = 'smart_grid_data'
 
 HDFS_PATH_STOCK_BASE = f"{HDFS_NAMENODE}/user/stock_market" 
 HDFS_PATH_STOCK_RAW = f"{HDFS_PATH_STOCK_BASE}/raw"
 HDFS_PATH_CHECKPOINTS_SPEED_STOCK = f"{HDFS_PATH_STOCK_BASE}/checkpoints/speed_layer"
 
+HDFS_PATH_ARTICLES_BASE = f"{HDFS_NAMENODE}/user/articles"
+HDFS_PATH_ARTICLES_RAW = f"{HDFS_PATH_ARTICLES_BASE}/raw"
+HDFS_PATH_CHECKPOINTS_SPEED_ARTICLES = f"{HDFS_PATH_ARTICLES_BASE}/checkpoints/speed_layer"
+
 ES_INDEX_STOCK_BATCH_VIEWS = 'stock_market_batch_views'
 ES_INDEX_STOCK_REALTIME_VIEWS = 'stock_market_realtime_views'
+
+ES_INDEX_ARTICLE_BATCH_VIEWS = 'articles_batch_views'
+ES_INDEX_ARTICLE_REALTIME_VIEWS = 'articles_realtime_views'
+
+ES_DOC_ID_FIELD_ARTICLE_BATCH = 'doc_id' 
+ES_DOC_ID_FIELD_ARTICLE_RT = 'rt_view_id' 
 
 ES_DOC_ID_FIELD_STOCK_BATCH = 'doc_id'
 ES_DOC_ID_FIELD_STOCK_RT = 'rt_view_id' 

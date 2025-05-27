@@ -14,6 +14,9 @@
     - Tạo thư mục HDFS (Cho dữ liệu):
       docker-compose exec namenode hdfs dfs -mkdir -p /user/stock_market/raw
       docker-compose exec namenode hdfs dfs -mkdir -p /user/stock_market/checkpoints/speed_layer
+      Tùy chọn (Nếu chạy cả json_producer):
+      docker-compose exec namenode hdfs dfs -mkdir -p /user/articles/raw
+      docker-compose exec namenode hdfs dfs -mkdir -p /user/articles/checkpoints/speed_layer
 
 3.  Chạy Các Thành phần Ứng dụng (Chứng khoán):
 
@@ -37,10 +40,10 @@
         - Chạy lệnh sau để xử lý dữ liệu hiện có trong Kafka và lưu vào HDFS:
           docker-compose exec spark-master spark-submit --master spark://spark-master:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1 --conf spark.cores.max=1 /app/batch_layer/kafka_to_hdfs.py
 
-      - Bước 3.3.3: Batch Processing (Stock - HDFS to ES)
-        docker-compose exec spark-master spark-submit --master spark://spark-master:7077 --packages org.elasticsearch:elasticsearch-spark-30_2.12:8.11.1 --conf spark.cores.max=1 /app/batch_layer/batch_processor.py YYYY-MM-DD (thay bằng ngày cụ thể)
       - Bước 3.3.2: Liệt kê patition_time:
         docker-compose exec namenode hdfs dfs -ls hdfs://namenode:9000/user/stock_market/raw/
+      - Bước 3.3.3: Batch Processing (Stock - HDFS to ES)
+        docker-compose exec spark-master spark-submit --master spark://spark-master:7077 --packages org.elasticsearch:elasticsearch-spark-30_2.12:8.11.1 --conf spark.cores.max=1 /app/batch_layer/batch_processor.py YYYY-MM-DD (thay bằng ngày cụ thể)
 
 4.  Truy cập Giao diện Web
 
@@ -50,9 +53,6 @@
     - Elasticsearch API: [http://localhost:9200](http://localhost:9200) (Ví dụ: truy cập `http://localhost:9200/_cat/indices?v` để xem danh sách index).
 
 5.  Dừng và Dọn dẹp:
-
-    - Để dừng các container đang chạy:
-      docker-compose down
 
     - Để dừng và xóa tất cả dữ liệu trong volumes (HDFS, Elasticsearch, Kafka data, Checkpoints):
       docker-compose down -v

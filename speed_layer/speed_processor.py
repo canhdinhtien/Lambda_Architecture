@@ -124,7 +124,7 @@ def main():
             from_json(col("value").cast("string"), input_schema).alias("data")
         )
 
-        fields_to_select_from_data = [f.name for f in input_schema.fields if f.name.lower() != 'symbol' and f.name.lower() != 'mack'] # Đảm bảo không lấy lại symbol/MaCK
+        fields_to_select_from_data = [f.name for f in input_schema.fields if f.name.lower() != 'symbol' and f.name.lower() != 'mack'] 
         select_exprs_from_data = [col(f"data.{field_name}") for field_name in fields_to_select_from_data]
         parsed_stream_df = df_with_data.select(
             col("symbol"), 
