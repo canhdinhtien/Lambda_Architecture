@@ -24,6 +24,7 @@ SPARK_PACKAGES_KAFKA = "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1"
 SPARK_PACKAGES_ES = "org.elasticsearch:elasticsearch-spark-30_2.12:8.11.1"
 
 BATCH_TARGET_DATE_FORMAT = "yyyy-MM-dd"
+HDFS_NAMENODE_URI = "hdfs://namenode:9000"
 
 print("--- Configuration Loaded ---")
 print(f"Kafka Brokers: {KAFKA_BROKERS}")

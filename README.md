@@ -40,7 +40,7 @@
       - Bước 3.3.3: Batch Processing (Stock - HDFS to ES)
         docker-compose exec spark-master spark-submit --master spark://spark-master:7077 --packages org.elasticsearch:elasticsearch-spark-30_2.12:8.11.1 --conf spark.cores.max=1 /app/batch_layer/batch_processor.py YYYY-MM-DD (thay bằng ngày cụ thể)
       - Bước 3.3.2: Liệt kê patition_time:
-        docker-compose exec spark-master python /app/batch_layer/list_partition_time.py
+        docker-compose exec namenode hdfs dfs -ls hdfs://namenode:9000/user/stock_market/raw/
 
 4.  Truy cập Giao diện Web
 
